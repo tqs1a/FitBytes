@@ -1,0 +1,197 @@
+/* 
+  Localizable.strings (English)
+  TestApp
+*/
+
+// Tab Bar
+"tab.home" = "Home";
+"tab.activity" = "Activity";
+"tab.progress" = "Progress";
+"tab.profile" = "Profile";
+
+// Home Screen
+"home.welcome_back" = "Welcome back!";
+"home.ready_for_workout" = "Ready for your workout?";
+"home.quick_actions" = "Quick Actions";
+"home.workout_start" = "Start Workout";
+"home.quick_training" = "Quick Training";
+"home.nutrition_track" = "Track Nutrition";
+"home.track_calories" = "Track Calories";
+"home.today" = "Today";
+
+// Stats
+"stats.steps" = "Steps";
+"stats.calories" = "Calories";
+"stats.activity" = "Activity";
+"stats.water" = "Water";
+"stats.minutes" = "Minutes";
+"stats.glasses" = "Glasses";
+"stats.distance" = "Distance";
+"stats.heart_rate" = "Heart Rate";
+"stats.sleep" = "Sleep";
+"stats.calories_eaten" = "Calories Eaten";
+"stats.of" = "of";
+
+// Activity Feed
+"activity.activities" = "Activities";
+"activity.ai_overview" = "AI Overview";
+"activity.today" = "Today";
+"activity.week" = "Week";
+"activity.workouts" = "Workouts";
+
+// Workout Screen
+"workout.title" = "Workout";
+"workout.types" = "Workout Types";
+"workout.recent" = "Recent Workouts";
+"workout.start" = "Start Workout";
+"workout.running" = "Running";
+"workout.cycling" = "Cycling";
+"workout.strength" = "Strength Training";
+"workout.yoga" = "Yoga";
+"workout.swimming" = "Swimming";
+
+// Nutrition Screen
+"nutrition.title" = "Nutrition";
+"nutrition.daily_goal" = "Daily Goal";
+"nutrition.breakfast" = "Breakfast";
+"nutrition.lunch" = "Lunch";
+"nutrition.dinner" = "Dinner";
+"nutrition.snacks" = "Snacks";
+"nutrition.add_meal" = "Add Meal";
+"nutrition.water_intake" = "Water Intake";
+"nutrition.macros" = "Macronutrients";
+
+// Profile & Settings
+"profile.title" = "Profile";
+"profile.settings" = "Settings";
+"profile.statistics" = "Statistics";
+"profile.preferences" = "Preferences";
+"profile.edit" = "Edit Profile";
+"profile.quick_overview" = "Quick Overview";
+"profile.weight" = "Weight";
+"profile.bmi" = "BMI";
+"profile.goal" = "Goal";
+
+// Settings Screen
+"settings.language" = "Language";
+"settings.customize_home_stats" = "Customize Home Stats";
+"settings.notifications" = "Notifications";
+"settings.privacy" = "Privacy";
+"settings.security" = "Security";
+"settings.help_support" = "Help & Support";
+"settings.about" = "About the App";
+"settings.other_settings" = "Other Settings";
+"settings.edit_home_stats" = "Edit Home Stats";
+"settings.stats_enabled" = "stats enabled";
+"settings.preview" = "Preview";
+"settings.notifications_subtitle" = "Manage push notifications";
+"settings.privacy_subtitle" = "Data and privacy settings";
+"settings.security_subtitle" = "Security options";
+"settings.help_support_subtitle" = "Get help and feedback";
+"settings.about_version" = "Version 1.0.0";
+"settings.weight_unit" = "Weight Unit";
+"settings.weight_unit_kg" = "Kilograms (kg)";
+"settings.weight_unit_lbs" = "Pounds (lbs)";
+
+// Programs & Workouts
+"program.my_programs" = "My Programs";
+"program.create_new" = "Create New Program";
+"program.program_name" = "Program Name";
+"program.enter_name" = "Enter program name";
+"program.select_image" = "Select Image";
+"program.photo_library" = "Photo Library";
+"program.preset_icons" = "Preset Icons";
+"program.empty_state" = "No programs yet";
+"program.empty_subtitle" = "Create your first workout program";
+"program.last_completed" = "Last completed";
+"program.never_completed" = "Not completed yet";
+"program.times_completed" = "times completed";
+"program.create" = "Create Program";
+"program.exercises" = "Exercises";
+"program.edit" = "Edit Program";
+"program.save_changes" = "Save Changes";
+"program.add_exercise" = "Add Exercise";
+"program.no_exercises_yet" = "No exercises yet";
+"program.add_exercises_to_start" = "Add exercises to build your program";
+"program.remove_exercise" = "Remove Exercise";
+"program.remove_exercise_confirm" = "Are you sure you want to remove this exercise from the program?";
+"program.remove" = "Remove";
+"program.sets" = "Sets";
+"program.reps" = "Reps";
+"program.weight" = "Weight";
+"program.rest" = "Rest";
+"program.notes" = "Notes";
+"program.add_notes" = "Add notes (optional)";
+"program.ready_for_workout" = "Ready for your workout?";
+
+// Exercise Library
+"exercise.library" = "Exercise Library";
+"exercise.all_exercises" = "All Exercises";
+"exercise.favorites" = "Favorites";
+"exercise.search" = "Search exercises";
+"exercise.filter_by" = "Filter by muscle group";
+"exercise.no_favorites" = "No favorite exercises yet";
+"exercise.tap_star" = "Tap the star to add favorites";
+"exercise.details" = "Exercise Details";
+"exercise.instructions" = "Instructions";
+"exercise.muscle_groups" = "Muscle Groups";
+"exercise.demonstration" = "Demonstration";
+"exercise.add_to_program" = "Add to Program";
+"exercise.custom" = "Custom";
+"exercise.preset" = "Preset";
+
+// Muscle Groups
+"muscle.chest" = "Chest";
+"muscle.back" = "Back";
+"muscle.legs" = "Legs";
+"muscle.shoulders" = "Shoulders";
+"muscle.arms" = "Arms";
+"muscle.core" = "Core";
+"muscle.cardio" = "Cardio";
+"muscle.full_body" = "Full Body";
+"muscle.all" = "All";
+
+// Exercise Names
+"exercise.name.bench_press" = "Bench Press";
+"exercise.name.push_ups" = "Push-ups";
+"exercise.name.dumbbell_flyes" = "Dumbbell Flyes";
+"exercise.name.incline_bench_press" = "Incline Bench Press";
+"exercise.name.deadlift" = "Deadlift";
+"exercise.name.pull_ups" = "Pull-ups";
+"exercise.name.bent_over_row" = "Bent Over Row";
+"exercise.name.lat_pulldown" = "Lat Pulldown";
+"exercise.name.squat" = "Squat";
+"exercise.name.lunges" = "Lunges";
+"exercise.name.leg_press" = "Leg Press";
+"exercise.name.romanian_deadlift" = "Romanian Deadlift";
+"exercise.name.overhead_press" = "Overhead Press";
+"exercise.name.lateral_raise" = "Lateral Raise";
+"exercise.name.face_pulls" = "Face Pulls";
+"exercise.name.barbell_curl" = "Barbell Curl";
+"exercise.name.tricep_dips" = "Tricep Dips";
+"exercise.name.hammer_curls" = "Hammer Curls";
+"exercise.name.tricep_pushdown" = "Tricep Pushdown";
+"exercise.name.plank" = "Plank";
+"exercise.name.russian_twists" = "Russian Twists";
+"exercise.name.hanging_leg_raises" = "Hanging Leg Raises";
+"exercise.name.cable_crunches" = "Cable Crunches";
+"exercise.name.running" = "Running";
+"exercise.name.cycling" = "Cycling";
+"exercise.name.jump_rope" = "Jump Rope";
+"exercise.name.burpees" = "Burpees";
+"exercise.name.clean_and_press" = "Clean and Press";
+"exercise.name.kettlebell_swings" = "Kettlebell Swings";
+"exercise.name.turkish_get_up" = "Turkish Get-Up";
+
+// Common
+"common.done" = "Done";
+"common.cancel" = "Cancel";
+"common.save" = "Save";
+"common.edit" = "Edit";
+"common.add" = "Add";
+"common.delete" = "Delete";
+"common.share" = "Share";
+"common.loading" = "Loading";
+"common.create" = "Create";
+"common.search" = "Search";
+

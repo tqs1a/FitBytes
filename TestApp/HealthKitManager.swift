@@ -1,7 +1,7 @@
 import Foundation
 import HealthKit
 import SwiftUI
-internal import Combine
+import Combine
 
 @MainActor
 final class HealthKitManager: ObservableObject {
@@ -10,6 +10,7 @@ final class HealthKitManager: ObservableObject {
 
     @Published var todaySteps: Int = 0
     @Published var todayActiveEnergy: Double = 0
+    @Published var todayExerciseMinutes: Double = 0
 
     private init() {}
 
@@ -45,6 +46,7 @@ final class HealthKitManager: ObservableObject {
     func fetchTodayData() {
         fetchTodaySteps()
         fetchTodayActiveEnergy()
+        fetchTodayExerciseMinutes()
     }
 
     private func fetchTodaySteps() {
@@ -62,7 +64,11 @@ final class HealthKitManager: ObservableObject {
             }
 
             let value = stats?.sumQuantity()?.doubleValue(for: HKUnit.count()) ?? 0
-            self.todaySteps = Int(value)
+            
+            // Update on main thread since HealthKitManager is marked with @MainActor
+            Task { @MainActor in
+                self.todaySteps = Int(value)
+            }
         }
 
         healthStore.execute(query)
@@ -83,7 +89,36 @@ final class HealthKitManager: ObservableObject {
             }
 
             let value = stats?.sumQuantity()?.doubleValue(for: .kilocalorie()) ?? 0
-            self.todayActiveEnergy = value
+            
+            // Update on main thread since HealthKitManager is marked with @MainActor
+            Task { @MainActor in
+                self.todayActiveEnergy = value
+            }
+        }
+
+        healthStore.execute(query)
+    }
+
+    private func fetchTodayExerciseMinutes() {
+        guard let exerciseType = HKQuantityType.quantityType(forIdentifier: .appleExerciseTime) else { return }
+
+        let start = Calendar.current.startOfDay(for: Date())
+        let predicate = HKQuery.predicateForSamples(withStart: start, end: Date(), options: .strictStartDate)
+
+        let query = HKStatisticsQuery(quantityType: exerciseType,
+                                      quantitySamplePredicate: predicate,
+                                      options: .cumulativeSum) { _, stats, error in
+            if let error = error {
+                print("Error fetching exercise time: \(error.localizedDescription)")
+                return
+            }
+
+            let value = stats?.sumQuantity()?.doubleValue(for: HKUnit.minute()) ?? 0
+            
+            // Update on main thread since HealthKitManager is marked with @MainActor
+            Task { @MainActor in
+                self.todayExerciseMinutes = value
+            }
         }
 
         healthStore.execute(query)
@@ -92,7 +127,8 @@ final class HealthKitManager: ObservableObject {
     // MARK: - Live Updates
     func enableLiveUpdates() {
         guard let stepType = HKObjectType.quantityType(forIdentifier: .stepCount),
-              let energyType = HKObjectType.quantityType(forIdentifier: .activeEnergyBurned) else { return }
+              let energyType = HKObjectType.quantityType(forIdentifier: .activeEnergyBurned),
+              let exerciseType = HKObjectType.quantityType(forIdentifier: .appleExerciseTime) else { return }
 
         // Steps Observer
         let stepObserver = HKObserverQuery(sampleType: stepType,
@@ -102,7 +138,11 @@ final class HealthKitManager: ObservableObject {
                 completionHandler()
                 return
             }
-            self.fetchTodayData()
+            
+            // Call fetchTodayData on main thread since HealthKitManager is marked with @MainActor
+            Task { @MainActor in
+                self.fetchTodayData()
+            }
             completionHandler()
         }
 
@@ -114,12 +154,33 @@ final class HealthKitManager: ObservableObject {
                 completionHandler()
                 return
             }
-            self.fetchTodayData()
+            
+            // Call fetchTodayData on main thread since HealthKitManager is marked with @MainActor
+            Task { @MainActor in
+                self.fetchTodayData()
+            }
+            completionHandler()
+        }
+
+        // Exercise Time Observer
+        let exerciseObserver = HKObserverQuery(sampleType: exerciseType,
+                                               predicate: nil) { query, completionHandler, error in
+            if let error = error {
+                print("Exercise observer error: \(error.localizedDescription)")
+                completionHandler()
+                return
+            }
+            
+            // Call fetchTodayData on main thread since HealthKitManager is marked with @MainActor
+            Task { @MainActor in
+                self.fetchTodayData()
+            }
             completionHandler()
         }
 
         healthStore.execute(stepObserver)
         healthStore.execute(energyObserver)
+        healthStore.execute(exerciseObserver)
 
         healthStore.enableBackgroundDelivery(for: stepType, frequency: .immediate) { success, error in
             if let error = error {
@@ -129,6 +190,11 @@ final class HealthKitManager: ObservableObject {
         healthStore.enableBackgroundDelivery(for: energyType, frequency: .immediate) { success, error in
             if let error = error {
                 print("Failed to enable background delivery for energy: \(error.localizedDescription)")
+            }
+        }
+        healthStore.enableBackgroundDelivery(for: exerciseType, frequency: .immediate) { success, error in
+            if let error = error {
+                print("Failed to enable background delivery for exercise: \(error.localizedDescription)")
             }
         }
     }
