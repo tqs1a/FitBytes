@@ -191,6 +191,7 @@ struct ExerciseLibraryView: View {
                 }
             }
         }
+        .id(localization.selectedLanguage) // Force refresh when language changes
     }
 }
 

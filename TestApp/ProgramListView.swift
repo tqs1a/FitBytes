@@ -84,6 +84,7 @@ struct ProgramListView: View {
         .sheet(isPresented: $showingExerciseLibrary) {
             ExerciseLibraryView()
         }
+        .id(localization.selectedLanguage) // Force refresh when language changes
     }
 }
 

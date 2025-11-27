@@ -40,6 +40,7 @@ struct TestAppApp: App {
             ContentView()
                 .environmentObject(localizationManager)
                 .environmentObject(statsPreferences)
+                .environment(\.localization, localizationManager)
         }
         .modelContainer(sharedModelContainer)
     }

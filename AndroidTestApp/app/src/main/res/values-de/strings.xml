@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Fitness Tracker</string>
+    
+    <!-- Tab Bar -->
+    <string name="tab_home">Home</string>
+    <string name="tab_activity">Aktivität</string>
+    <string name="tab_progress">Fortschritt</string>
+    <string name="tab_profile">Profil</string>
+    
+    <!-- Home Screen -->
+    <string name="home_welcome_back">Willkommen zurück!</string>
+    <string name="home_ready_for_workout">Bereit für dein Training?</string>
+    <string name="home_quick_actions">Schnellaktionen</string>
+    <string name="home_workout_start">Workout starten</string>
+    <string name="home_quick_training">Schnelles Training</string>
+    <string name="home_nutrition_track">Ernährung tracken</string>
+    <string name="home_track_calories">Kalorien erfassen</string>
+    <string name="home_today">Heute</string>
+    
+    <!-- Stats -->
+    <string name="stats_steps">Schritte</string>
+    <string name="stats_calories">Kalorien</string>
+    <string name="stats_activity">Aktivität</string>
+    <string name="stats_water">Wasser</string>
+    <string name="stats_minutes">Minuten</string>
+    <string name="stats_glasses">Gläser</string>
+    <string name="stats_distance">Distanz</string>
+    <string name="stats_heart_rate">Herzfrequenz</string>
+    <string name="stats_sleep">Schlaf</string>
+    <string name="stats_calories_eaten">Gegessene Kalorien</string>
+    <string name="stats_of">von</string>
+    
+    <!-- Activity Feed -->
+    <string name="activity_activities">Aktivitäten</string>
+    <string name="activity_ai_overview">KI-Übersicht</string>
+    <string name="activity_today">Heute</string>
+    <string name="activity_week">Woche</string>
+    <string name="activity_workouts">Workouts</string>
+    
+    <!-- AI Overview Messages -->
+    <string name="ai_overview_today">Heute hast du bereits 8.420 Schritte gemacht und 1.850 Kalorien verbrannt. Du bist auf dem richtigen Weg, um dein Tagesziel zu erreichen!</string>
+    <string name="ai_overview_week">Diese Woche war sehr aktiv! Du hattest durchschnittlich 9.200 Schritte pro Tag und hast 5 Workouts absolviert. Dein Fortschritt ist beeindruckend!</string>
+    
+    <!-- Activity Feed Items -->
+    <string name="activity_running">Laufen</string>
+    <string name="activity_running_description">30 Minuten im Park</string>
+    <string name="activity_lunch">Mittagessen</string>
+    <string name="activity_lunch_description">Gesunde Schüssel mit 650 kcal</string>
+    <string name="activity_water">Wasser</string>
+    <string name="activity_water_description">2 Gläser getrunken</string>
+    <string name="activity_breakfast">Frühstück</string>
+    <string name="activity_breakfast_description">Haferflocken mit Beeren</string>
+    <string name="activity_strength_training">Krafttraining</string>
+    <string name="activity_strength_training_description">45 Minuten im Fitnessstudio</string>
+    <string name="activity_yoga">Yoga</string>
+    <string name="activity_yoga_description">60 Minuten Entspannung</string>
+    <string name="activity_swimming">Schwimmen</string>
+    <string name="activity_swimming_description">40 Minuten Bahnen</string>
+    <string name="activity_cycling">Radfahren</string>
+    <string name="activity_cycling_description">25 Minuten Stadtfahrt</string>
+    <string name="activity_yesterday">Gestern</string>
+    <string name="activity_monday">Montag</string>
+    <string name="activity_sunday">Sonntag</string>
+    <string name="activity_saturday">Samstag</string>
+    
+    <!-- Workout Screen -->
+    <string name="workout_title">Workout</string>
+    <string name="workout_types">Workout-Typen</string>
+    <string name="workout_recent">Letzte Workouts</string>
+    <string name="workout_start">Workout starten</string>
+    <string name="workout_running">Laufen</string>
+    <string name="workout_cycling">Radfahren</string>
+    <string name="workout_strength">Krafttraining</string>
+    <string name="workout_yoga">Yoga</string>
+    <string name="workout_swimming">Schwimmen</string>
+    
+    <!-- Nutrition Screen -->
+    <string name="nutrition_title">Ernährung</string>
+    <string name="nutrition_daily_goal">Tagesziel</string>
+    <string name="nutrition_breakfast">Frühstück</string>
+    <string name="nutrition_lunch">Mittagessen</string>
+    <string name="nutrition_dinner">Abendessen</string>
+    <string name="nutrition_snacks">Snacks</string>
+    <string name="nutrition_add_meal">Mahlzeit hinzufügen</string>
+    <string name="nutrition_water_intake">Wasseraufnahme</string>
+    <string name="nutrition_macros">Makronährstoffe</string>
+    
+    <!-- Profile & Settings -->
+    <string name="profile_title">Profil</string>
+    <string name="profile_settings">Einstellungen</string>
+    <string name="profile_statistics">Statistiken</string>
+    <string name="profile_preferences">Präferenzen</string>
+    <string name="profile_edit">Profil bearbeiten</string>
+    <string name="profile_quick_overview">Schnellübersicht</string>
+    <string name="profile_weight">Gewicht</string>
+    <string name="profile_bmi">BMI</string>
+    <string name="profile_goal">Ziel</string>
+    
+    <!-- Settings Screen -->
+    <string name="settings_language">Sprache</string>
+    <string name="settings_customize_home_stats">Home-Statistiken anpassen</string>
+    <string name="settings_notifications">Benachrichtigungen</string>
+    <string name="settings_privacy">Datenschutz</string>
+    <string name="settings_security">Sicherheit</string>
+    <string name="settings_help_support">Hilfe &amp; Support</string>
+    <string name="settings_about">Über die App</string>
+    <string name="settings_other_settings">Weitere Einstellungen</string>
+    <string name="settings_edit_home_stats">Home-Statistiken bearbeiten</string>
+    <string name="settings_stats_enabled">Statistiken aktiviert</string>
+    <string name="settings_preview">Vorschau</string>
+    <string name="settings_notifications_subtitle">Push-Benachrichtigungen verwalten</string>
+    <string name="settings_privacy_subtitle">Daten- und Datenschutzeinstellungen</string>
+    <string name="settings_security_subtitle">Sicherheitsoptionen</string>
+    <string name="settings_help_support_subtitle">Hilfe erhalten und Feedback geben</string>
+    <string name="settings_about_version">Version 1.0.0</string>
+    <string name="settings_weight_unit">Gewichtseinheit</string>
+    <string name="settings_weight_unit_kg">Kilogramm (kg)</string>
+    <string name="settings_weight_unit_lbs">Pfund (lbs)</string>
+    
+    <!-- Programs & Workouts -->
+    <string name="program_my_programs">Meine Programme</string>
+    <string name="program_create_new">Neues Programm erstellen</string>
+    <string name="program_program_name">Programmname</string>
+    <string name="program_enter_name">Programmnamen eingeben</string>
+    <string name="program_select_image">Bild auswählen</string>
+    <string name="program_photo_library">Fotobibliothek</string>
+    <string name="program_preset_icons">Vordefinierte Symbole</string>
+    <string name="program_empty_state">Noch keine Programme</string>
+    <string name="program_empty_subtitle">Erstelle dein erstes Trainingsprogramm</string>
+    <string name="program_last_completed">Zuletzt abgeschlossen</string>
+    <string name="program_never_completed">Noch nicht abgeschlossen</string>
+    <string name="program_times_completed">mal abgeschlossen</string>
+    <string name="program_create">Programm erstellen</string>
+    <string name="program_exercises">Übungen</string>
+    <string name="program_edit">Programm bearbeiten</string>
+    <string name="program_save_changes">Änderungen speichern</string>
+    <string name="program_add_exercise">Übung hinzufügen</string>
+    <string name="program_no_exercises_yet">Noch keine Übungen</string>
+    <string name="program_add_exercises_to_start">Füge Übungen hinzu, um dein Programm aufzubauen</string>
+    <string name="program_remove_exercise">Übung entfernen</string>
+    <string name="program_remove_exercise_confirm">Möchtest du diese Übung wirklich aus dem Programm entfernen?</string>
+    <string name="program_remove">Entfernen</string>
+    <string name="program_sets">Sätze</string>
+    <string name="program_reps">Wiederholungen</string>
+    <string name="program_weight">Gewicht</string>
+    <string name="program_rest">Pause</string>
+    <string name="program_notes">Notizen</string>
+    <string name="program_add_notes">Notizen hinzufügen (optional)</string>
+    <string name="program_ready_for_workout">Bereit für dein Training?</string>
+    
+    <!-- Exercise Library -->
+    <string name="exercise_library">Übungsbibliothek</string>
+    <string name="exercise_all_exercises">Alle Übungen</string>
+    <string name="exercise_favorites">Favoriten</string>
+    <string name="exercise_search">Übungen suchen</string>
+    <string name="exercise_filter_by">Nach Muskelgruppe filtern</string>
+    <string name="exercise_no_favorites">Noch keine Lieblingsübungen</string>
+    <string name="exercise_tap_star">Tippe auf den Stern, um Favoriten hinzuzufügen</string>
+    <string name="exercise_details">Übungsdetails</string>
+    <string name="exercise_instructions">Anleitung</string>
+    <string name="exercise_muscle_groups">Muskelgruppen</string>
+    <string name="exercise_demonstration">Demonstration</string>
+    <string name="exercise_add_to_program">Zu Programm hinzufügen</string>
+    <string name="exercise_custom">Eigene</string>
+    <string name="exercise_preset">Vordefiniert</string>
+    
+    <!-- Muscle Groups -->
+    <string name="muscle_chest">Brust</string>
+    <string name="muscle_back">Rücken</string>
+    <string name="muscle_legs">Beine</string>
+    <string name="muscle_shoulders">Schultern</string>
+    <string name="muscle_arms">Arme</string>
+    <string name="muscle_core">Core</string>
+    <string name="muscle_cardio">Cardio</string>
+    <string name="muscle_full_body">Ganzkörper</string>
+    <string name="muscle_all">Alle</string>
+    
+    <!-- Exercise Names -->
+    <string name="exercise_name_bench_press">Bankdrücken</string>
+    <string name="exercise_name_push_ups">Liegestütze</string>
+    <string name="exercise_name_dumbbell_flyes">Fliegende mit Kurzhanteln</string>
+    <string name="exercise_name_incline_bench_press">Schrägbankdrücken</string>
+    <string name="exercise_name_deadlift">Kreuzheben</string>
+    <string name="exercise_name_pull_ups">Klimmzüge</string>
+    <string name="exercise_name_bent_over_row">Vorgebeugtes Rudern</string>
+    <string name="exercise_name_lat_pulldown">Latziehen</string>
+    <string name="exercise_name_squat">Kniebeugen</string>
+    <string name="exercise_name_lunges">Ausfallschritte</string>
+    <string name="exercise_name_leg_press">Beinpresse</string>
+    <string name="exercise_name_romanian_deadlift">Rumänisches Kreuzheben</string>
+    <string name="exercise_name_overhead_press">Schulterdrücken</string>
+    <string name="exercise_name_lateral_raise">Seitheben</string>
+    <string name="exercise_name_face_pulls">Face Pulls</string>
+    <string name="exercise_name_barbell_curl">Langhantel-Curls</string>
+    <string name="exercise_name_tricep_dips">Trizeps-Dips</string>
+    <string name="exercise_name_hammer_curls">Hammer-Curls</string>
+    <string name="exercise_name_tricep_pushdown">Trizeps-Drücken</string>
+    <string name="exercise_name_plank">Plank</string>
+    <string name="exercise_name_russian_twists">Russische Drehungen</string>
+    <string name="exercise_name_hanging_leg_raises">Hängende Beinheben</string>
+    <string name="exercise_name_cable_crunches">Cable Crunches</string>
+    <string name="exercise_name_running">Laufen</string>
+    <string name="exercise_name_cycling">Radfahren</string>
+    <string name="exercise_name_jump_rope">Seilspringen</string>
+    <string name="exercise_name_burpees">Burpees</string>
+    <string name="exercise_name_clean_and_press">Reißen und Drücken</string>
+    <string name="exercise_name_kettlebell_swings">Kettlebell-Schwünge</string>
+    <string name="exercise_name_turkish_get_up">Turkish Get-Up</string>
+    
+    <!-- Common -->
+    <string name="common_done">Fertig</string>
+    <string name="common_cancel">Abbrechen</string>
+    <string name="common_save">Speichern</string>
+    <string name="common_edit">Bearbeiten</string>
+    <string name="common_add">Hinzufügen</string>
+    <string name="common_delete">Löschen</string>
+    <string name="common_share">Teilen</string>
+    <string name="common_loading">Lädt</string>
+    <string name="common_create">Erstellen</string>
+    <string name="common_search">Suchen</string>
+</resources>
+

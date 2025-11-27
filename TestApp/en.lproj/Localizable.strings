@@ -39,6 +39,32 @@
 "activity.week" = "Week";
 "activity.workouts" = "Workouts";
 
+// AI Overview Messages
+"ai.overview.today" = "Today you've already taken 8,420 steps and burned 1,850 calories. You're on track to reach your daily goal!";
+"ai.overview.week" = "This week was very active! You averaged 9,200 steps per day and completed 5 workouts. Your progress is impressive!";
+
+// Activity Feed Items
+"activity.running" = "Running";
+"activity.running_description" = "30 minutes in the park";
+"activity.lunch" = "Lunch";
+"activity.lunch_description" = "Healthy bowl with 650 kcal";
+"activity.water" = "Water";
+"activity.water_description" = "2 glasses drank";
+"activity.breakfast" = "Breakfast";
+"activity.breakfast_description" = "Oatmeal with berries";
+"activity.strength_training" = "Strength Training";
+"activity.strength_training_description" = "45 minutes at the gym";
+"activity.yoga" = "Yoga";
+"activity.yoga_description" = "60 minutes of relaxation";
+"activity.swimming" = "Swimming";
+"activity.swimming_description" = "40 minutes laps";
+"activity.cycling" = "Cycling";
+"activity.cycling_description" = "25 minutes city ride";
+"activity.yesterday" = "Yesterday";
+"activity.monday" = "Monday";
+"activity.sunday" = "Sunday";
+"activity.saturday" = "Saturday";
+
 // Workout Screen
 "workout.title" = "Workout";
 "workout.types" = "Workout Types";

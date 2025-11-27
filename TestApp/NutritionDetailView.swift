@@ -423,12 +423,14 @@ struct MealEntryRow: View {
             
             Spacer()
             
-            Text("\(entry.calories)")
-                .font(.system(size: 17, weight: .semibold))
-                .foregroundColor(.white) +
-            Text(" kcal")
-                .font(.system(size: 13, weight: .medium))
-                .foregroundColor(.white.opacity(0.7))
+            HStack(alignment: .firstTextBaseline, spacing: 0) {
+                Text("\(entry.calories)")
+                    .font(.system(size: 17, weight: .semibold))
+                    .foregroundColor(.white)
+                Text(" kcal")
+                    .font(.system(size: 13, weight: .medium))
+                    .foregroundColor(.white.opacity(0.7))
+            }
         }
         .padding(12)
         .background(

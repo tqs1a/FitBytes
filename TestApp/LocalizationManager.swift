@@ -12,20 +12,46 @@ import Combine
 enum AppLanguage: String, CaseIterable {
     case english = "en"
     case german = "de"
+    case french = "fr"
+    case spanish = "es"
+    case italian = "it"
+    // Add more language cases as you add .lproj folders
+    
+    // Display name mapping - supports dynamic language discovery
+    private static let displayNames: [String: (english: String, native: String)] = [
+        "en": ("English", "English"),
+        "de": ("German", "Deutsch"),
+        "fr": ("French", "Français"),
+        "es": ("Spanish", "Español"),
+        "it": ("Italian", "Italiano")
+    ]
     
     // Display name with both English and native name
     var displayName: String {
-        switch self {
-        case .english: return "English"
-        case .german: return "German - Deutsch"
+        guard let names = Self.displayNames[rawValue] else {
+            // Fallback: use NSLocale for unknown languages
+            let locale = Locale(identifier: rawValue)
+            let englishName = Locale(identifier: "en").localizedString(forLanguageCode: rawValue)?.capitalized ?? rawValue.uppercased()
+            let nativeName = locale.localizedString(forLanguageCode: rawValue)?.capitalized ?? rawValue.uppercased()
+            return "\(englishName) - \(nativeName)"
         }
+        return "\(names.english) - \(names.native)"
     }
     
     // Native name only
     var nativeName: String {
-        switch self {
-        case .english: return "English"
-        case .german: return "Deutsch"
+        if let names = Self.displayNames[rawValue] {
+            return names.native
+        }
+        // Fallback: use NSLocale for unknown languages
+        let locale = Locale(identifier: rawValue)
+        return locale.localizedString(forLanguageCode: rawValue)?.capitalized ?? rawValue.uppercased()
+    }
+    
+    // Filter to only show languages that have bundles available
+    static var availableLanguages: [AppLanguage] {
+        return allCases.filter { language in
+            Bundle.main.path(forResource: language.rawValue, ofType: "lproj") != nil
         }
     }
 }
@@ -101,8 +127,20 @@ class LocalizationManager: ObservableObject {
 
 // SwiftUI helper for localization
 extension String {
-    func localized() -> String {
-        return LocalizationManager.shared.localizedString(self)
+    func localized(using localization: LocalizationManager = LocalizationManager.shared) -> String {
+        return localization.localizedString(self)
+    }
+}
+
+// Environment key for easy access
+struct LocalizationEnvironmentKey: EnvironmentKey {
+    static let defaultValue = LocalizationManager.shared
+}
+
+extension EnvironmentValues {
+    var localization: LocalizationManager {
+        get { self[LocalizationEnvironmentKey.self] }
+        set { self[LocalizationEnvironmentKey.self] = newValue }
     }
 }
 
@@ -285,6 +323,32 @@ struct LocalizedKey {
     static let muscleCardio = "muscle.cardio"
     static let muscleFullBody = "muscle.full_body"
     static let muscleAll = "muscle.all"
+    
+    // AI Overview
+    static let aiOverviewToday = "ai.overview.today"
+    static let aiOverviewWeek = "ai.overview.week"
+    
+    // Activity Feed Items
+    static let activityRunning = "activity.running"
+    static let activityRunningDescription = "activity.running_description"
+    static let activityLunch = "activity.lunch"
+    static let activityLunchDescription = "activity.lunch_description"
+    static let activityWater = "activity.water"
+    static let activityWaterDescription = "activity.water_description"
+    static let activityBreakfast = "activity.breakfast"
+    static let activityBreakfastDescription = "activity.breakfast_description"
+    static let activityStrengthTraining = "activity.strength_training"
+    static let activityStrengthTrainingDescription = "activity.strength_training_description"
+    static let activityYoga = "activity.yoga"
+    static let activityYogaDescription = "activity.yoga_description"
+    static let activitySwimming = "activity.swimming"
+    static let activitySwimmingDescription = "activity.swimming_description"
+    static let activityCycling = "activity.cycling"
+    static let activityCyclingDescription = "activity.cycling_description"
+    static let activityYesterday = "activity.yesterday"
+    static let activityMonday = "activity.monday"
+    static let activitySunday = "activity.sunday"
+    static let activitySaturday = "activity.saturday"
     
     // Common
     static let done = "common.done"

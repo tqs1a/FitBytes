@@ -48,7 +48,7 @@ struct EditHomeStatsView: View {
                                     .padding(.vertical, 40)
                             } else {
                                 VStack(spacing: 12) {
-                                    ForEach(tempEnabledStats) { stat in
+                                    ForEach(Array(tempEnabledStats.enumerated()), id: \.element.id) { index, stat in
                                         StatToggleCard(
                                             stat: stat,
                                             isEnabled: true,
@@ -56,11 +56,16 @@ struct EditHomeStatsView: View {
                                                 withAnimation(.spring(response: 0.3)) {
                                                     tempEnabledStats.removeAll { $0 == stat }
                                                 }
+                                            },
+                                            onMove: { direction in
+                                                let newIndex = direction == .up ? index - 1 : index + 1
+                                                if newIndex >= 0 && newIndex < tempEnabledStats.count {
+                                                    // Swap items instantly (no animation) to prevent teleporting during drag
+                                                    let item = tempEnabledStats.remove(at: index)
+                                                    tempEnabledStats.insert(item, at: newIndex)
+                                                }
                                             }
                                         )
-                                    }
-                                    .onMove { source, destination in
-                                        tempEnabledStats.move(fromOffsets: source, toOffset: destination)
                                     }
                                 }
                                 .padding(.horizontal, 20)
@@ -135,89 +140,148 @@ struct StatToggleCard: View {
     let stat: StatType
     let isEnabled: Bool
     let onToggle: () -> Void
-    @State private var isPressed = false
+    var onMove: ((MoveDirection) -> Void)? = nil
+    @State private var isDragging = false
+    @State private var lastMoveDirection: MoveDirection? = nil
+    @State private var dragTranslation: CGFloat = 0
+    @State private var baseOffset: CGFloat = 0
+    @State private var cardHeight: CGFloat = 0
+    
+    enum MoveDirection {
+        case up
+        case down
+    }
     
     var body: some View {
-        Button(action: {
-            onToggle()
-        }) {
-            HStack(spacing: 16) {
-                // Drag handle (only for enabled stats)
-                if isEnabled {
-                    Image(systemName: "line.3.horizontal")
-                        .font(.system(size: 16, weight: .medium))
-                        .foregroundColor(.white.opacity(0.5))
-                        .frame(width: 24)
-                }
-                
-                // Icon
-                Image(systemName: stat.icon)
-                    .font(.system(size: 24, weight: .medium))
-                    .foregroundColor(.navyAccent)
-                    .frame(width: 44, height: 44)
-                    .background(
-                        Circle()
-                            .fill(
-                                LinearGradient(
-                                    colors: [.navyAccent.opacity(0.2), .navyAccent.opacity(0.1)],
-                                    startPoint: .topLeading,
-                                    endPoint: .bottomTrailing
-                                )
-                            )
+        HStack(spacing: 16) {
+            // Drag handle (only for enabled stats)
+            if isEnabled, let onMove = onMove {
+                Image(systemName: "line.3.horizontal")
+                    .font(.system(size: 16, weight: .medium))
+                    .foregroundColor(isDragging ? .navyAccent : .white.opacity(0.5))
+                    .frame(width: 24)
+                    .gesture(
+                        DragGesture(minimumDistance: 0)
+                            .onChanged { value in
+                                // Capture height if not set
+                                if !isDragging {
+                                    isDragging = true
+                                    lastMoveDirection = nil
+                                }
+                                
+                                dragTranslation = value.translation.height
+                                
+                                // Visual offset = dragTranslation + baseOffset
+                                let effectiveOffset = dragTranslation + baseOffset
+                                let threshold = cardHeight * 0.6 // Trigger when overlapping > 60%
+                                
+                                if abs(effectiveOffset) > threshold {
+                                    let direction: MoveDirection = effectiveOffset < 0 ? .up : .down
+                                    
+                                    // Only move if we changed direction or haven't moved yet
+                                    if lastMoveDirection != direction {
+                                        onMove(direction)
+                                        lastMoveDirection = direction
+                                        
+                                        // Compensate for the slot change
+                                        if direction == .up {
+                                            baseOffset += (cardHeight + 12) // Height + spacing
+                                        } else {
+                                            baseOffset -= (cardHeight + 12)
+                                        }
+                                    } else {
+                                        // Allow subsequent moves in same direction if threshold exceeded again? 
+                                        // For now, requiring direction change or reset prevents rapid firing
+                                        lastMoveDirection = nil 
+                                    }
+                                }
+                            }
+                            .onEnded { _ in
+                                lastMoveDirection = nil
+                                withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                                    isDragging = false
+                                    dragTranslation = 0
+                                    baseOffset = 0
+                                }
+                            }
                     )
+            } else if isEnabled {
+                Image(systemName: "line.3.horizontal")
+                    .font(.system(size: 16, weight: .medium))
+                    .foregroundColor(.white.opacity(0.5))
+                    .frame(width: 24)
+            }
+            
+            // Icon
+            Image(systemName: stat.icon)
+                .font(.system(size: 24, weight: .medium))
+                .foregroundColor(.navyAccent)
+                .frame(width: 44, height: 44)
+                .background(
+                    Circle()
+                        .fill(
+                            LinearGradient(
+                                colors: [.navyAccent.opacity(0.2), .navyAccent.opacity(0.1)],
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            )
+                        )
+                )
+            
+            // Stat Info
+            VStack(alignment: .leading, spacing: 4) {
+                Text(stat.displayName)
+                    .font(.system(size: 17, weight: .semibold))
+                    .foregroundColor(.white)
                 
-                // Stat Info
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(stat.displayName)
-                        .font(.system(size: 17, weight: .semibold))
-                        .foregroundColor(.white)
-                    
-                    Text("\(stat.sampleValue) \(stat.unit)")
-                        .font(.system(size: 13, weight: .regular))
-                        .foregroundColor(.white.opacity(0.6))
-                }
-                
-                Spacer()
-                
-                // Toggle Indicator
+                Text("\(stat.sampleValue) \(stat.unit)")
+                    .font(.system(size: 13, weight: .regular))
+                    .foregroundColor(.white.opacity(0.6))
+            }
+            
+            Spacer()
+            
+            // Toggle Indicator - Only this button is tappable
+            Button(action: {
+                onToggle()
+            }) {
                 Image(systemName: isEnabled ? "checkmark.circle.fill" : "plus.circle")
                     .font(.system(size: 24, weight: .medium))
                     .foregroundColor(isEnabled ? .green : .navyAccent)
             }
-            .padding(16)
-            .background(
-                RoundedRectangle(cornerRadius: 16)
-                    .fill(
-                        LinearGradient(
-                            colors: isEnabled ? 
-                                [.navyAccent.opacity(0.2), .navyAccent.opacity(0.1)] :
-                                [.white.opacity(0.12), .white.opacity(0.08)],
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        )
-                    )
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 16)
-                            .stroke(isEnabled ? Color.navyAccent.opacity(0.3) : Color.white.opacity(0.1), lineWidth: 1)
-                    )
-            )
-            .shadow(color: .black.opacity(0.15), radius: 6, x: 0, y: 3)
-            .scaleEffect(isPressed ? 0.98 : 1.0)
+            .buttonStyle(PlainButtonStyle())
         }
-        .buttonStyle(PlainButtonStyle())
-        .simultaneousGesture(
-            DragGesture(minimumDistance: 0)
-                .onChanged { _ in
-                    withAnimation(.easeInOut(duration: 0.1)) {
-                        isPressed = true
-                    }
+        .padding(16)
+        .background(
+            GeometryReader { geometry in
+                Color.clear.onAppear {
+                    cardHeight = geometry.size.height
                 }
-                .onEnded { _ in
-                    withAnimation(.easeInOut(duration: 0.1)) {
-                        isPressed = false
-                    }
+                .onChange(of: geometry.size.height) { newHeight in
+                    cardHeight = newHeight
                 }
+            }
         )
+        .opacity(isDragging ? 0.8 : 1.0)
+        .background(
+            RoundedRectangle(cornerRadius: 16)
+                .fill(
+                    LinearGradient(
+                        colors: isEnabled ? 
+                            [.navyAccent.opacity(0.2), .navyAccent.opacity(0.1)] :
+                            [.white.opacity(0.12), .white.opacity(0.08)],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                )
+                .overlay(
+                    RoundedRectangle(cornerRadius: 16)
+                        .stroke(isEnabled ? (isDragging ? Color.navyAccent : Color.navyAccent.opacity(0.3)) : Color.white.opacity(0.1), lineWidth: isDragging ? 2 : 1)
+                )
+        )
+        .shadow(color: isDragging ? .navyAccent.opacity(0.3) : .black.opacity(0.15), radius: isDragging ? 12 : 6, x: 0, y: isDragging ? 8 : 3)
+        .offset(y: dragTranslation + baseOffset)
+        .animation(.spring(response: 0.3, dampingFraction: 0.7), value: isDragging)
     }
 }
 

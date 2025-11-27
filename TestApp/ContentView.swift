@@ -471,6 +471,11 @@ struct ActivityFeedView: View {
     @ObservedObject private var localization = LocalizationManager.shared
     @State private var selectedPeriod: TimePeriod = .today
     
+    // Force refresh when language changes
+    private var languageId: String {
+        localization.selectedLanguage
+    }
+    
     enum TimePeriod: String, CaseIterable {
         case today
         case week
@@ -528,6 +533,7 @@ struct ActivityFeedView: View {
             .navigationBarTitleDisplayMode(.large)
             .toolbarColorScheme(.dark, for: .navigationBar)
         }
+        .id(languageId) // Force refresh when language changes
     }
 }
 
@@ -556,6 +562,7 @@ struct PeriodButton: View {
 }
 
 struct AIOverviewCard: View {
+    @ObservedObject private var localization = LocalizationManager.shared
     let period: ActivityFeedView.TimePeriod
     
     var body: some View {
@@ -584,8 +591,8 @@ struct AIOverviewCard: View {
             
             VStack(alignment: .leading, spacing: 12) {
                 Text(period == .today ?
-                     "Today you've already taken 8,420 steps and burned 1,850 calories. You're on track to reach your daily goal!" :
-                     "This week was very active! You averaged 9,200 steps per day and completed 5 workouts. Your progress is impressive!")
+                     LocalizedKey.aiOverviewToday.localized() :
+                     LocalizedKey.aiOverviewWeek.localized())
                     .font(.system(size: 15, weight: .regular))
                     .foregroundColor(.white.opacity(0.8))
                     .lineLimit(nil)
@@ -652,17 +659,17 @@ struct ActivityFeedItem {
     static func sampleData(for period: ActivityFeedView.TimePeriod) -> [ActivityFeedItem] {
         if period == .today {
             return [
-                ActivityFeedItem(title: "Running", description: "30 minutes in the park", time: "14:30", icon: "figure.run", color: .navyAccent),
-                ActivityFeedItem(title: "Lunch", description: "Healthy bowl with 650 kcal", time: "12:45", icon: "fork.knife", color: .green),
-                ActivityFeedItem(title: "Water", description: "2 glasses drank", time: "11:20", icon: "drop", color: .cyan),
-                ActivityFeedItem(title: "Breakfast", description: "Oatmeal with berries", time: "08:15", icon: "sun.max", color: .orange)
+                ActivityFeedItem(title: LocalizedKey.activityRunning.localized(), description: LocalizedKey.activityRunningDescription.localized(), time: "14:30", icon: "figure.run", color: .navyAccent),
+                ActivityFeedItem(title: LocalizedKey.activityLunch.localized(), description: LocalizedKey.activityLunchDescription.localized(), time: "12:45", icon: "fork.knife", color: .green),
+                ActivityFeedItem(title: LocalizedKey.activityWater.localized(), description: LocalizedKey.activityWaterDescription.localized(), time: "11:20", icon: "drop", color: .cyan),
+                ActivityFeedItem(title: LocalizedKey.activityBreakfast.localized(), description: LocalizedKey.activityBreakfastDescription.localized(), time: "08:15", icon: "sun.max", color: .orange)
             ]
         } else {
             return [
-                ActivityFeedItem(title: "Strength Training", description: "45 minutes at the gym", time: "Yesterday", icon: "dumbbell", color: .navyAccent),
-                ActivityFeedItem(title: "Yoga", description: "60 minutes of relaxation", time: "Monday", icon: "figure.yoga", color: .purple),
-                ActivityFeedItem(title: "Swimming", description: "40 minutes laps", time: "Sunday", icon: "figure.pool.swim", color: .cyan),
-                ActivityFeedItem(title: "Cycling", description: "25 minutes city ride", time: "Saturday", icon: "bicycle", color: .green)
+                ActivityFeedItem(title: LocalizedKey.activityStrengthTraining.localized(), description: LocalizedKey.activityStrengthTrainingDescription.localized(), time: LocalizedKey.activityYesterday.localized(), icon: "dumbbell", color: .navyAccent),
+                ActivityFeedItem(title: LocalizedKey.activityYoga.localized(), description: LocalizedKey.activityYogaDescription.localized(), time: LocalizedKey.activityMonday.localized(), icon: "figure.yoga", color: .purple),
+                ActivityFeedItem(title: LocalizedKey.activitySwimming.localized(), description: LocalizedKey.activitySwimmingDescription.localized(), time: LocalizedKey.activitySunday.localized(), icon: "figure.pool.swim", color: .cyan),
+                ActivityFeedItem(title: LocalizedKey.activityCycling.localized(), description: LocalizedKey.activityCyclingDescription.localized(), time: LocalizedKey.activitySaturday.localized(), icon: "bicycle", color: .green)
             ]
         }
     }

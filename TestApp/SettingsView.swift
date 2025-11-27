@@ -31,7 +31,7 @@ struct SettingsView: View {
                             SectionHeader(title: LocalizedKey.language.localized())
                             
                             VStack(spacing: 12) {
-                                ForEach(AppLanguage.allCases, id: \.self) { language in
+                                ForEach(AppLanguage.availableLanguages, id: \.self) { language in
                                     LanguageOptionCard(
                                         language: language,
                                         isSelected: selectedLanguage == language,
